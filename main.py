@@ -1,6 +1,4 @@
-import zad_1
-import zad_2
-import zad_3
+from functions import zad_1, zad_2, zad_3
 
 print('Wynik zadania 1')
 zad_1.zad_1()
