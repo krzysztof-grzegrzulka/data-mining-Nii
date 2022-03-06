@@ -3,6 +3,7 @@ import ssl
 import nltk
 
 import functions.sanitize_text
+import functions.stemming
 import functions.stop_words
 
 try:
@@ -22,5 +23,9 @@ source_txt = 'Lorem ipsum dolor :) sit amet, 12 consectetur; ' \
 print(functions.sanitize_text.sanitize_text(source_txt))
 
 nltk.download('stopwords')
-nltk.download('punkt')
 print(functions.stop_words.stop_words(source_txt))
+
+nltk.download('punkt')
+print(functions.stemming.stemming("friend,friendship,friends,friendships,"
+                                  "stabil,destabilize,misunderstanding,"
+                                  "railroad,moonlight,scientific,knowledge"))
