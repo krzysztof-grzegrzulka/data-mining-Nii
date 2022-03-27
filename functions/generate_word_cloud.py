@@ -35,10 +35,10 @@ def generate_word_cloud(csv_filename: str):
 
     csv_text = ' '.join(csv_content)
     sanitized = sanitize_text(csv_text)
-    stop_removed = stop_words_remove(sanitized)
-    stemmed = stemming(stop_removed)
+    stemmed = stemming(sanitized)
+    stop_removed = stop_words_remove(stemmed)
 
-    bow = bag_of_words(stemmed)
+    bow = bag_of_words(stop_removed)
     # print(bow)
 
     wc = WordCloud()

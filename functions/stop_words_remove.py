@@ -1,7 +1,6 @@
 from nltk.corpus import stopwords
 
 
-def stop_words_remove(source_text: str) -> list:
+def stop_words_remove(source_text: list) -> list:
     stop_words = set(stopwords.words('english'))
-    list_of_words = source_text.split(' ')
-    return [word for word in list_of_words if word not in stop_words]
+    return [word for word in source_text if word not in stop_words]
