@@ -17,26 +17,9 @@ nltk.download('stopwords')
 nltk.download('punkt')
 
 
-# def text_tokenizer(csv_filename: str):
 def text_tokenizer(csv_text: str):
     output_words = []
-    # csv_content = []
-    # csv_text = ""
-    # csv_location = 'dataset/' + csv_filename + '.csv'
-    #
-    # df = pd.read_csv(csv_location)
-    # for i in tqdm(range(len(df['title']))):
-    #     csv_text += df['title'].iloc[i] + " "
-    # with open(csv_location) as csv_file:
-    #     csv_reader = csv.reader(csv_file, delimiter=',')
-    #     line_count = 0
-    #     for row in csv_reader:
-    #         if line_count == 0:
-    #             line_count += 1
-    #         else:
-    #             csv_content += row
 
-    # csv_text = ' '.join(csv_content)
     sanitized = sanitize_text(csv_text)
     stemmed = stemming(sanitized)
     stop_removed = stop_words_remove(stemmed)
