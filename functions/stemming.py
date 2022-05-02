@@ -1,10 +1,9 @@
 from nltk.stem import PorterStemmer
 
 
-def stemming(source_text: str) -> list:
+def stemming(source_text: list) -> list:
     output_list = []
     porter = PorterStemmer()
-    source_text = source_text.split(' ')
     for word in source_text:
         output_list.append(porter.stem(word))
 

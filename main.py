@@ -2,10 +2,12 @@ import numpy as np
 import pandas as pd
 from numpy import argmax
 from scipy.stats import mode
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import (CountVectorizer, TfidfVectorizer)
 from tqdm import tqdm
 
 from functions.text_tokenizer import text_tokenizer
+from functions.top_x_documents import top_x_documents
+from functions.top_x_tokens import top_x_tokens
 
 csv_files = ['Fake', 'True']
 
@@ -19,20 +21,19 @@ for file in csv_files:
         csv_text += df['title'].iloc[i] + " "
         csv_list.append(df['title'].iloc[i])
 
-    vectorizer = CountVectorizer(tokenizer=text_tokenizer(csv_text))
-    # X_transform = vectorizer.fit_transform(csv_list[:3])
-    X_transform = vectorizer.fit_transform(csv_list)
-    print(vectorizer.get_feature_names_out())
-    X_transform_array = X_transform.toarray()
-    sum_columns = X_transform_array.sum(axis=0)
-    # sum_columns.tolist().sort(reverse=True)
-    # sum_columns.sort()
-    sum_columns = sum_columns.tolist()
-    sum_columns.sort(reverse=True)
-    # print(sum_columns[-9:])
-    print(sum_columns[:9])
-    # print(type(sum_columns))
-    # print(mode(X_transform_array, axis=0))
-    # for X in X_transform_array:
-    #     top10_mo = argmax(X_transform_array, axis=0)
-    #     print(top10_mo)
+    vectorizer_count = CountVectorizer(tokenizer=text_tokenizer)
+    X_transform = vectorizer_count.fit_transform(csv_list)
+
+    vectorizer_tfidf = TfidfVectorizer(tokenizer=text_tokenizer)
+    tfidf_transform = vectorizer_tfidf.fit_transform(csv_list)
+
+    print("top 10 most often occurring")
+    print(top_x_tokens(X_transform.toarray().sum(axis=0),
+                       vectorizer_count.get_feature_names_out(), 10))
+
+    print("top 10 most important")
+    print(top_x_tokens(tfidf_transform.toarray().sum(axis=0),
+                       vectorizer_tfidf.get_feature_names_out(), 10))
+
+    print("top 10 documents with highest number of tokens")
+    print(top_x_documents(X_transform.toarray().sum(axis=1), 10))
