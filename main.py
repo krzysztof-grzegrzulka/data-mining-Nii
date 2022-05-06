@@ -18,7 +18,6 @@ for file in csv_files:
 
     df = pd.read_csv(csv_location)
     for i in tqdm(range(len(df['title']))):
-        csv_text += df['title'].iloc[i] + " "
         csv_list.append(df['title'].iloc[i])
 
     vectorizer_count = CountVectorizer(tokenizer=text_tokenizer)
