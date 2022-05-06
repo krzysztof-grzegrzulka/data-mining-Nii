@@ -20,7 +20,7 @@ nltk.download('punkt')
 def text_tokenizer(src_text: str) -> list:
     tokenized_text_list = []
     text = sanitize_text(src_text)
-    text_list = text.split(" ")
+    text_list = text.split(' ')
     text_list = stemming(text_list)
     text_list = stop_words_remove(text_list)
 
