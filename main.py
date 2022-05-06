@@ -12,7 +12,8 @@ from tqdm import tqdm
 
 from functions.bag_of_words import bag_of_words
 from functions.generate_plot_most_important import generate_plot_most_important
-from functions.generate_table_most_important import generate_table_most_important
+from functions.generate_table_most_important import (
+    generate_table_most_important)
 from functions.sanitize_text import sanitize_text
 from functions.stemming import stemming
 from functions.stop_words_remove import stop_words_remove
@@ -52,7 +53,8 @@ from functions.generate_word_cloud import generate_word_cloud
 #     print(f'{classifier}\'s accuracy: ',
 #           round(metrics.accuracy_score(y_test, prediction), 5))
 
-# reviews_df = pd.read_json(r'dataset/goodreads_reviews_spoiler_raw.json', lines=True)
+# reviews_df = pd.read_json(r'dataset/goodreads_reviews_spoiler_raw.json',
+#                           lines=True)
 # reviews_df.head()
 
 # cols = ['book_id', 'rating', 'review_text']
@@ -88,7 +90,7 @@ with open(file_name) as f:
 
 # print(reviews_list[0:2])
 
-### sanitize text for later use ###
+# sanitize text for later use #
 src_text = ' '.join(reviews_list)
 sanitized = sanitize_text(src_text)
 sanitized_list = sanitized.split()
@@ -97,14 +99,14 @@ sanitized_list = sanitized.split()
 stop_removed = stop_words_remove(sanitized_list)
 stemmed = stemming(stop_removed)
 
-### visualisations ###
+# visualisations #
 # generate_word_cloud(stop_removed)
 generate_word_cloud(stemmed)
 
 review_df = pd.DataFrame(data=data, columns=cols)
 # print(review_df)
 
-### TOP 10 ###
+# TOP 10 #
 for i in tqdm(range(len(review_df))):
     # df_text += review_df['review_text'].iloc[i] + ' '
     df_list.append(review_df['review_text'].iloc[i])
@@ -113,7 +115,7 @@ print('df_list generated')
 
 vectorizer_count = CountVectorizer(tokenizer=text_tokenizer)
 X_transform = vectorizer_count.fit_transform(df_list)
-#
+
 # vectorizer_tfidf = TfidfVectorizer(tokenizer=text_tokenizer)
 # tfidf_transform = vectorizer_tfidf.fit_transform(df_list)
 
@@ -129,7 +131,7 @@ X_transform = vectorizer_count.fit_transform(df_list)
 # print("top 10 documents with highest number of tokens")
 # print(top_x_documents(X_transform.toarray().sum(axis=1), 10))
 
-### TOP important table & plot ###
+# TOP important table & plot #
 # bow_reviews = bag_of_words(stemmed)
 # print(bow_reviews)
 
@@ -142,7 +144,7 @@ X_transform = vectorizer_count.fit_transform(df_list)
 #     vectorizer_count.get_feature_names_out(), 15),
 #     bow_reviews, 'count, book reviews')
 
-### classifiers ###
+# classifiers #
 # vectorizer_count_class = CountVectorizer(tokenizer=text_tokenizer)
 # X_transform_class = vectorizer_count_class.fit_transform(review_df['review_text'])
 
