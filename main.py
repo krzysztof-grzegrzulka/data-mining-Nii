@@ -166,3 +166,11 @@ disp.plot(ax=ax)
 plt.show()
 print(classification_report(y_test, prediction, target_names=classif.classes_))
 print(confusion_matrix(y_test, prediction))
+
+# Accuracy: 0,7582 - ile przypadków zostało odpowiednio przypisanych do swoich
+#   klas
+# Precision - umiejętność z jaką NIE zaklasyfikował pozytywnych przypadków
+#   jako negatywnych. % poprawnych predykcji
+# Recall - umiejętność znalezienia wszystkich poprawnych przypadków
+# F1 score - średnia harmoniczna (?) precision i recall (1.0 najlepiej)
+# Support - prawdziwa liczba przypadków określonej klasy
