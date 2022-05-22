@@ -1,5 +1,4 @@
 import re
-import emoji
 
 
 def sanitize_text(source_text: str, mentions: int = 0) -> str:

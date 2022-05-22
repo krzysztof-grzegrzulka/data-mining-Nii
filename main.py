@@ -53,14 +53,12 @@ title_list = ['all tweets', 'positive tweets', 'negative tweets',
 df_stemmed_list = [all_stemmed, positive_stemmed, negative_stemmed,
                    neutral_stemmed]
 
-df_pos_neg = pd.concat([df_positive, df_negative])
-
 print('Sentiment values')
 print(df_all['airline_sentiment'].value_counts())
 print('\n')
 
 i = 0
-print('Word Clouds')
+print('Sanitizing text and Word Clouds')
 for datafr in df_text_list:
     src_text = ' '.join(datafr)
     sanitized = sanitize_text(src_text)
@@ -91,9 +89,6 @@ print(top_x_tokens(tfidf_transform_positive.toarray().sum(axis=0),
 print("top 10 documents with highest number of tokens - POSITIVE")
 print(top_x_documents(X_transform_positive.toarray().sum(axis=1), 10))
 
-bow_positive = bag_of_words(positive_stemmed)
-bow_negative = bag_of_words(negative_stemmed)
-
 print('\nTOP 10 stuff - all')
 vectorizer_count_all = CountVectorizer(tokenizer=text_tokenizer)
 X_transform_all = vectorizer_count_all.fit_transform(df_all['text'])
@@ -111,6 +106,10 @@ print(top_x_tokens(tfidf_transform_all.toarray().sum(axis=0),
 
 print("top 10 documents with highest number of tokens - ALL")
 print(top_x_documents(tfidf_transform_all.toarray().sum(axis=1), 10))
+
+# does not work correctly
+# bow_positive = bag_of_words(positive_stemmed)
+# bow_negative = bag_of_words(negative_stemmed)
 
 # print("POSITIVE")
 # generate_table_most_important(top_x_tokens(
@@ -150,7 +149,7 @@ for classifier in classif_list:
     print('\n\n')
 
 print('Classification report for RandomForestClassifier')
-print('The most accurate one')
+print('(The most accurate one)')
 classif = RandomForestClassifier()
 classif.fit(x_train, y_train)
 fig, ax = plt.subplots(1, 1)

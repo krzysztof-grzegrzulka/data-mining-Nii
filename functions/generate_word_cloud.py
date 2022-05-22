@@ -18,7 +18,7 @@ nltk.download('stopwords')
 nltk.download('punkt')
 
 
-def generate_word_cloud(words_list: list, title: str = 'word cloud'):
+def generate_word_cloud(words_list: list, title: str = 'word_cloud'):
     bow = bag_of_words(words_list)
 
     wc = WordCloud()
@@ -26,5 +26,5 @@ def generate_word_cloud(words_list: list, title: str = 'word cloud'):
     plt.imshow(wc, interpolation='bilinear')
     plt.axis("off")
     plt.title(title)
-    plt.savefig('wordcloud.png')
+    plt.savefig(f'{title}.png')
     plt.show()
